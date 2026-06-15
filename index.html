@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SarkariSaathi | सरकारी साथी</title>
+
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">🇮🇳 SarkariSaathi</a>
+        <div class="ml-auto">
+            <button class="btn btn-outline-warning btn-sm" id="langToggle">हिंदी में देखें</button>
+        </div>
+    </nav>
+
+    <div class="container mt-5" id="mainContent">
+
+   <!-- Hero Section -->
+<div class="text-center mb-5">
+    <h1 class="display-4 font-weight-bold">🇮🇳 SarkariSaathi</h1>
+    <p class="lead text-muted">सरकारी योजनाओं की पूरी जानकारी, एक जगह</p>
+</div>
+
+<!-- Category Cards -->
+<h4 class="text-center mb-4">अपनी category चुनें</h4>
+<div class="row justify-content-center">
+    <div class="col-6 col-md-3 col-lg">
+    <div class="card text-center category-card" onclick="showSchemes('defence')">
+        <div class="card-body">
+            <i class="bi bi-shield-fill" style="font-size:2.5rem; color:#1a6b3c;"></i>
+            <p class="mt-2 font-weight-bold">Defence Families</p>
+        </div>
+    </div>
+</div>
+    <div class="col-6 col-md-3 col-lg">
+        <div class="card text-center category-card" onclick="showSchemes('students')">
+            <div class="card-body">
+               <i class="bi bi-mortarboard-fill" style="font-size:2.5rem; color:#ff6600;"></i>
+                <p class="mt-2 font-weight-bold">Students</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 col-lg">
+        <div class="card text-center category-card" onclick="showSchemes('women')">
+            <div class="card-body">
+               <i class="bi bi-gender-female" style="font-size:2.5rem; color:#e91e8c;"></i>
+                <p class="mt-2 font-weight-bold">Women</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 col-lg">
+        <div class="card text-center category-card" onclick="showSchemes('farmer')">
+            <div class="card-body">
+                <i class="bi bi-flower1" style="font-size:2.5rem; color:#28a745;"></i>
+                <p class="mt-2 font-weight-bold">Farmer</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 col-lg">
+        <div class="card text-center category-card" onclick="showSchemes('senior')">
+            <div class="card-body">
+              
+                <!-- Senior Citizens -->
+<i class="bi bi-person-check-fill" style="font-size:2.5rem; color:#6c757d;"></i>                <p class="mt-2 font-weight-bold">Senior Citizens</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 col-lg">
+    <div class="card text-center category-card" onclick="showSchemes('disability')">
+        <div class="card-body">
+            <i class="bi bi-person-wheelchair" style="font-size:2.5rem; color:#007bff;"></i>
+            <p class="mt-2 font-weight-bold">Differently Abled</p>
+        </div>
+    </div>
+</div>
+    <div class="col-6 col-md-3 col-lg">
+        <div class="card text-center category-card" onclick="showSchemes('backward')">
+            <div class="card-body">
+             <i class="bi bi-people-fill" style="font-size:2.5rem; color:#ff6600;"></i>
+                <p class="mt-2 font-weight-bold">Backward Classes</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Schemes Section (hidden initially) -->
+<div id="schemesSection" class="mt-5" style="display:none;">
+</div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+
+</body>
+</html>
+

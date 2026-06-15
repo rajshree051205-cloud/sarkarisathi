@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, #ff6600, #138808) !important;
+    padding: 15px 20px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #fff7f0, #f0fff4);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    animation: fadeInDown 0.8s ease;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: #555;
+    animation: fadeInUp 0.8s ease;
+}
+
+/* Category Cards */
+.category-card {
+    cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    animation: fadeIn 0.5s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(255, 102, 0, 0.2);
+    border-color: #ff6600;
+}
+
+.category-card:active {
+    transform: translateY(-2px);
+}
+
+.category-card .display-4 {
+    font-size: 2.5rem;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .display-4 {
+    transform: scale(1.2);
+}
+
+.category-card p {
+    font-weight: 600;
+    color: #333;
+    margin-top: 8px;
+}
+
+/* Active Card */
+.category-card.active {
+    border-color: #ff6600;
+    background: linear-gradient(135deg, #fff7f0, #fff);
+    box-shadow: 0 10px 25px rgba(255, 102, 0, 0.3);
+}
+
+/* Schemes Section */
+#schemesSection {
+    animation: slideUp 0.5s ease;
+}
+
+.scheme-tabs .nav-link {
+    color: #555;
+    font-weight: 600;
+    border-radius: 25px !important;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.scheme-tabs .nav-link.active {
+    background: linear-gradient(135deg, #ff6600, #138808) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.scheme-card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.4s ease;
+}
+
+.scheme-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.scheme-badge-current {
+    background: #28a745;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.scheme-badge-upcoming {
+    background: #007bff;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.scheme-badge-ongoing {
+    background: #ff6600;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    .category-card .display-4 {
+        font-size: 2rem;
+    }
+}
+.category-card {
+    cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+   
+    height: 130px;
+    min-width: 130px;
+ /* fixed height add karo */
+}
+
+.category-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
