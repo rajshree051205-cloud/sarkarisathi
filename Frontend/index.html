@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,18 +25,18 @@
 
    <!-- Hero Section -->
 <div class="text-center mb-5">
-    <h1 class="display-4 font-weight-bold">🇮🇳 SarkariSaathi</h1>
-    <p class="lead text-muted">सरकारी योजनाओं की पूरी जानकारी, एक जगह</p>
+    <h1 class="display-4 font-weight-bold">🇮🇳 <span data-i18n="heroTitle">SarkariSaathi</span></h1>
+    <p class="lead text-muted" data-i18n="heroTagline">सरकारी योजनाओं की पूरी जानकारी, एक जगह</p>
 </div>
 
 <!-- Category Cards -->
-<h4 class="text-center mb-4">अपनी category चुनें</h4>
+<h4 class="text-center mb-4" data-i18n="chooseCategory">अपनी category चुनें</h4>
 <div class="row justify-content-center">
     <div class="col-6 col-md-3 col-lg">
     <div class="card text-center category-card" onclick="showSchemes('defence')">
         <div class="card-body">
             <i class="bi bi-shield-fill" style="font-size:2.5rem; color:#1a6b3c;"></i>
-            <p class="mt-2 font-weight-bold">Defence Families</p>
+            <p class="mt-2 font-weight-bold" data-i18n="catDefence">Defence Families</p>
         </div>
     </div>
 </div>
@@ -42,7 +44,7 @@
         <div class="card text-center category-card" onclick="showSchemes('students')">
             <div class="card-body">
                <i class="bi bi-mortarboard-fill" style="font-size:2.5rem; color:#ff6600;"></i>
-                <p class="mt-2 font-weight-bold">Students</p>
+                <p class="mt-2 font-weight-bold" data-i18n="catStudents">Students</p>
             </div>
         </div>
     </div>
@@ -50,7 +52,7 @@
         <div class="card text-center category-card" onclick="showSchemes('women')">
             <div class="card-body">
                <i class="bi bi-gender-female" style="font-size:2.5rem; color:#e91e8c;"></i>
-                <p class="mt-2 font-weight-bold">Women</p>
+                <p class="mt-2 font-weight-bold" data-i18n="catWomen">Women</p>
             </div>
         </div>
     </div>
@@ -58,7 +60,7 @@
         <div class="card text-center category-card" onclick="showSchemes('farmer')">
             <div class="card-body">
                 <i class="bi bi-flower1" style="font-size:2.5rem; color:#28a745;"></i>
-                <p class="mt-2 font-weight-bold">Farmer</p>
+                <p class="mt-2 font-weight-bold" data-i18n="catFarmer">Farmer</p>
             </div>
         </div>
     </div>
@@ -67,7 +69,7 @@
             <div class="card-body">
               
                 <!-- Senior Citizens -->
-<i class="bi bi-person-check-fill" style="font-size:2.5rem; color:#6c757d;"></i>                <p class="mt-2 font-weight-bold">Senior Citizens</p>
+<i class="bi bi-person-check-fill" style="font-size:2.5rem; color:#6c757d;"></i>                <p class="mt-2 font-weight-bold" data-i18n="catSenior">Senior Citizens</p>
             </div>
         </div>
     </div>
@@ -75,7 +77,7 @@
     <div class="card text-center category-card" onclick="showSchemes('disability')">
         <div class="card-body">
             <i class="bi bi-person-wheelchair" style="font-size:2.5rem; color:#007bff;"></i>
-            <p class="mt-2 font-weight-bold">Differently Abled</p>
+            <p class="mt-2 font-weight-bold" data-i18n="catDisability">Differently Abled</p>
         </div>
     </div>
 </div>
@@ -83,7 +85,7 @@
         <div class="card text-center category-card" onclick="showSchemes('backward')">
             <div class="card-body">
              <i class="bi bi-people-fill" style="font-size:2.5rem; color:#ff6600;"></i>
-                <p class="mt-2 font-weight-bold">Backward Classes</p>
+                <p class="mt-2 font-weight-bold" data-i18n="catBackward">Backward Classes</p>
             </div>
         </div>
     </div>
@@ -105,4 +107,3 @@
 
 </body>
 </html>
-
