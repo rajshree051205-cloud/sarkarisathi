@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,9 +91,82 @@
 
 
 
+<!-- Login button — appears once a category is selected -->
+<div id="loginBtnWrapper" class="text-right mb-2" style="display:none;">
+    <button class="btn btn-outline-success btn-sm" id="loginBtn" data-toggle="modal" data-target="#authModal">
+        <i class="bi bi-box-arrow-in-right"></i> <span data-i18n="loginBtnText">Login</span>
+    </button>
+</div>
+
+<!-- Shown instead of the login button once the user is logged in -->
+<div id="userStatusWrapper" class="text-right mb-2" style="display:none;">
+    <span id="welcomeText" class="mr-2 font-weight-bold"></span>
+    <button class="btn btn-outline-danger btn-sm" id="logoutBtn" data-i18n="logoutBtnText">Logout</button>
+</div>
+
 <!-- Schemes Section (hidden initially) -->
 <div id="schemesSection" class="mt-5" style="display:none;">
 </div>
+
+<!-- Auth Modal (Login / Sign Up) -->
+<div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="authModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div id="authError" class="alert alert-danger" style="display:none;"></div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label data-i18n="emailOrUsernameLabel">Email or Username</label>
+                <input type="text" class="form-control" id="loginIdentifier" required>
+            </div>
+            <div class="form-group">
+                <label data-i18n="passwordLabel">Password</label>
+                <input type="password" class="form-control" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block" data-i18n="loginSubmitBtn">Login</button>
+        </form>
+
+        <p class="text-center mt-3" id="showSignupPara">
+            <span data-i18n="noAccountText">Don't have an account?</span>
+            <a href="#" id="showSignupLink" data-i18n="signupLinkText">Sign up</a>
+        </p>
+
+        <!-- Sign Up Form (hidden initially) -->
+        <form id="signupForm" style="display:none;">
+            <div class="form-group">
+                <label data-i18n="usernameLabel">Username</label>
+                <input type="text" class="form-control" id="signupUsername" required>
+            </div>
+            <div class="form-group">
+                <label data-i18n="emailLabel">Email</label>
+                <input type="email" class="form-control" id="signupEmail" required>
+            </div>
+            <div class="form-group">
+                <label data-i18n="passwordLabel">Password</label>
+                <input type="password" class="form-control" id="signupPassword" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block" data-i18n="signupSubmitBtn">Sign Up</button>
+        </form>
+
+        <p class="text-center mt-3" id="showLoginPara" style="display:none;">
+            <span data-i18n="haveAccountText">Already have an account?</span>
+            <a href="#" id="showLoginLink" data-i18n="loginLinkText">Login</a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Popper -->

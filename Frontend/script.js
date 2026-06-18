@@ -1,4 +1,6 @@
 
+
+// ============ LANGUAGE STATE ============
 let currentLang = localStorage.getItem('sarkarisaathi_lang') || 'en';
 let currentCategory = null; // remembers which category is open so we can re-render on toggle
 
@@ -21,8 +23,30 @@ const uiText = {
     eligibility: { en: "Eligibility", hi: "पात्रता" },
     benefit: { en: "Benefit", hi: "लाभ" },
     viewDetails: { en: "View Details", hi: "विवरण देखें" },
-    toggleBtn: { en: "हिंदी में देखें", hi: "View in English" }
+    toggleBtn: { en: "हिंदी में देखें", hi: "View in English" },
+
+    // ---- Auth ----
+    loginBtnText: { en: "Login", hi: "लॉगिन" },
+    logoutBtnText: { en: "Logout", hi: "लॉगआउट" },
+    welcomePrefix: { en: "Welcome, ", hi: "नमस्ते, " },
+    authModalTitleLogin: { en: "Login", hi: "लॉगिन करें" },
+    authModalTitleSignup: { en: "Sign Up", hi: "साइन अप करें" },
+    emailOrUsernameLabel: { en: "Email or Username", hi: "ईमेल या यूज़रनेम" },
+    passwordLabel: { en: "Password", hi: "पासवर्ड" },
+    usernameLabel: { en: "Username", hi: "यूज़रनेम" },
+    emailLabel: { en: "Email", hi: "ईमेल" },
+    loginSubmitBtn: { en: "Login", hi: "लॉगिन करें" },
+    signupSubmitBtn: { en: "Sign Up", hi: "साइन अप करें" },
+    noAccountText: { en: "Don't have an account?", hi: "खाता नहीं है?" },
+    signupLinkText: { en: "Sign up", hi: "साइन अप करें" },
+    haveAccountText: { en: "Already have an account?", hi: "पहले से खाता है?" },
+    loginLinkText: { en: "Login", hi: "लॉगिन करें" }
 };
+
+// ============ AUTH STATE ============
+const API_BASE_URL = "http://localhost:8000/api/v1/users"; // change this if your backend runs elsewhere
+let currentUser = null;
+let authView = 'login'; // tracks which form is showing inside the modal: 'login' or 'signup'
 
 function t(key) {
     return uiText[key] ? uiText[key][currentLang] : key;
@@ -35,6 +59,17 @@ function applyStaticTranslations() {
     });
     var btn = document.getElementById('langToggle');
     if (btn) btn.textContent = currentLang === 'hi' ? uiText.toggleBtn.hi : uiText.toggleBtn.en;
+
+    // keep the auth modal title in sync with whichever form is currently shown
+    var modalTitle = document.getElementById('authModalLabel');
+    if (modalTitle) modalTitle.textContent = authView === 'login' ? t('authModalTitleLogin') : t('authModalTitleSignup');
+
+    // keep the "Welcome, X" text in sync if logged in
+    if (currentUser) {
+        var welcomeEl = document.getElementById('welcomeText');
+        if (welcomeEl) welcomeEl.textContent = t('welcomePrefix') + currentUser.username;
+    }
+
     document.documentElement.setAttribute('lang', currentLang);
 }
 
@@ -47,10 +82,130 @@ function toggleLanguage() {
     }
 }
 
+// ---- Modal view switching (login <-> signup) ----
+function showLoginForm() {
+    authView = 'login';
+    $('#signupForm').hide();
+    $('#loginForm').show();
+    $('#showSignupPara').show();
+    $('#showLoginPara').hide();
+    $('#authModalLabel').text(t('authModalTitleLogin'));
+    hideAuthError();
+}
+
+function showSignupForm() {
+    authView = 'signup';
+    $('#loginForm').hide();
+    $('#signupForm').show();
+    $('#showSignupPara').hide();
+    $('#showLoginPara').show();
+    $('#authModalLabel').text(t('authModalTitleSignup'));
+    hideAuthError();
+}
+
+function showAuthError(message) {
+    $('#authError').text(message).show();
+}
+
+function hideAuthError() {
+    $('#authError').hide();
+}
+
+// ---- UI state for logged in / logged out ----
+function updateAuthUI() {
+    if (currentUser) {
+        $('#loginBtnWrapper').hide();
+        $('#userStatusWrapper').show();
+        $('#welcomeText').text(t('welcomePrefix') + currentUser.username);
+    } else {
+        $('#userStatusWrapper').hide();
+        if (currentCategory) $('#loginBtnWrapper').show(); // only show Login once a category has been picked
+    }
+}
+
+// ---- API calls ----
+async function handleLogin(e) {
+    e.preventDefault();
+    hideAuthError();
+    var identifier = $('#loginIdentifier').val().trim();
+    var password = $('#loginPassword').val();
+    var body = identifier.includes('@') ? { email: identifier, password: password } : { username: identifier, password: password };
+
+    try {
+        var res = await fetch(API_BASE_URL + '/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(body)
+        });
+        var data = await res.json();
+        if (!res.ok) {
+            showAuthError(data.message || 'Login failed');
+            return;
+        }
+        currentUser = data.data.user;
+        $('#authModal').modal('hide');
+        $('#loginForm')[0].reset();
+        updateAuthUI();
+    } catch (err) {
+        showAuthError('Could not connect to server. Is the backend running?');
+    }
+}
+
+async function handleSignup(e) {
+    e.preventDefault();
+    hideAuthError();
+    var username = $('#signupUsername').val().trim();
+    var email = $('#signupEmail').val().trim();
+    var password = $('#signupPassword').val();
+
+    try {
+        var res = await fetch(API_BASE_URL + '/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ username: username, email: email, password: password })
+        });
+        var data = await res.json();
+        if (!res.ok) {
+            showAuthError(data.message || 'Sign up failed');
+            return;
+        }
+        // account created — switch them to the login form to sign in
+        $('#signupForm')[0].reset();
+        showLoginForm();
+        $('#loginIdentifier').val(username);
+    } catch (err) {
+        showAuthError('Could not connect to server. Is the backend running?');
+    }
+}
+
+async function handleLogout() {
+    try {
+        await fetch(API_BASE_URL + '/logout', { method: 'POST', credentials: 'include' });
+    } catch (err) {
+        // ignore network errors on logout — log out locally regardless
+    }
+    currentUser = null;
+    updateAuthUI();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     applyStaticTranslations();
     var btn = document.getElementById('langToggle');
     if (btn) btn.addEventListener('click', toggleLanguage);
+
+    // auth wiring
+    $('#loginForm').on('submit', handleLogin);
+    $('#signupForm').on('submit', handleSignup);
+    $('#showSignupLink').on('click', function (e) { e.preventDefault(); showSignupForm(); });
+    $('#showLoginLink').on('click', function (e) { e.preventDefault(); showLoginForm(); });
+    $('#logoutBtn').on('click', handleLogout);
+    $('#authModal').on('show.bs.modal', function () {
+        showLoginForm();
+        $('#loginForm')[0].reset();
+        $('#signupForm')[0].reset();
+    });
 });
 
 // ============ CATEGORY / SCHEME LOGIC ============
@@ -63,6 +218,7 @@ function showSchemes(category) {
         scrollTop: $('#schemesSection').offset().top - 20
     }, 600);
     loadSchemes(category);
+    updateAuthUI(); // reveal the Login button now that a category has been picked
 }
 
 function loadSchemes(category) {
