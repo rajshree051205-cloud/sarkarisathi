@@ -31,7 +31,7 @@
 <h4 class="text-center mb-4" data-i18n="chooseCategory">अपनी category चुनें</h4>
 <div class="row justify-content-center">
     <div class="col-6 col-md-3 col-lg">
-    <div class="card text-center category-card" onclick="showSchemes('defence')">
+    <div class="card text-center category-card" onclick="showSchemes('defence', this)">
         <div class="card-body">
             <i class="bi bi-shield-fill" style="font-size:2.5rem; color:#1a6b3c;"></i>
             <p class="mt-2 font-weight-bold" data-i18n="catDefence">Defence Families</p>
@@ -39,7 +39,7 @@
     </div>
 </div>
     <div class="col-6 col-md-3 col-lg">
-        <div class="card text-center category-card" onclick="showSchemes('students')">
+        <div class="card text-center category-card" onclick="showSchemes('students', this)">
             <div class="card-body">
                <i class="bi bi-mortarboard-fill" style="font-size:2.5rem; color:#ff6600;"></i>
                 <p class="mt-2 font-weight-bold" data-i18n="catStudents">Students</p>
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="col-6 col-md-3 col-lg">
-        <div class="card text-center category-card" onclick="showSchemes('women')">
+        <div class="card text-center category-card" onclick="showSchemes('women', this)">
             <div class="card-body">
                <i class="bi bi-gender-female" style="font-size:2.5rem; color:#e91e8c;"></i>
                 <p class="mt-2 font-weight-bold" data-i18n="catWomen">Women</p>
@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="col-6 col-md-3 col-lg">
-        <div class="card text-center category-card" onclick="showSchemes('farmer')">
+        <div class="card text-center category-card" onclick="showSchemes('farmer', this)">
             <div class="card-body">
                 <i class="bi bi-flower1" style="font-size:2.5rem; color:#28a745;"></i>
                 <p class="mt-2 font-weight-bold" data-i18n="catFarmer">Farmer</p>
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="col-6 col-md-3 col-lg">
-        <div class="card text-center category-card" onclick="showSchemes('senior')">
+        <div class="card text-center category-card" onclick="showSchemes('senior', this)">
             <div class="card-body">
               
                 <!-- Senior Citizens -->
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="col-6 col-md-3 col-lg">
-    <div class="card text-center category-card" onclick="showSchemes('disability')">
+    <div class="card text-center category-card" onclick="showSchemes('disability', this)">
         <div class="card-body">
             <i class="bi bi-person-wheelchair" style="font-size:2.5rem; color:#007bff;"></i>
             <p class="mt-2 font-weight-bold" data-i18n="catDisability">Differently Abled</p>
@@ -80,7 +80,7 @@
     </div>
 </div>
     <div class="col-6 col-md-3 col-lg">
-        <div class="card text-center category-card" onclick="showSchemes('backward')">
+        <div class="card text-center category-card" onclick="showSchemes('backward', this)">
             <div class="card-body">
              <i class="bi bi-people-fill" style="font-size:2.5rem; color:#ff6600;"></i>
                 <p class="mt-2 font-weight-bold" data-i18n="catBackward">Backward Classes</p>
@@ -177,4 +177,4 @@
     <script src="script.js"></script>
 
 </body>
-</html>
+</html>6

@@ -1,5 +1,3 @@
-
-
 // ============ LANGUAGE STATE ============
 let currentLang = localStorage.getItem('sarkarisaathi_lang') || 'en';
 let currentCategory = null; // remembers which category is open so we can re-render on toggle
@@ -124,6 +122,24 @@ function updateAuthUI() {
 }
 
 // ---- API calls ----
+
+// Checks whether the user already has a valid session (via the accessToken cookie)
+// and restores `currentUser` on page load/refresh, since `currentUser` itself
+// is just an in-memory variable and does not survive a reload.
+async function fetchCurrentUser() {
+    try {
+        var res = await fetch(API_BASE_URL + '/current-user', {
+            credentials: 'include'
+        });
+        if (!res.ok) return; // not logged in — that's fine, just stay logged out
+        var data = await res.json();
+        currentUser = data.data;
+        updateAuthUI();
+    } catch (err) {
+        // server unreachable or no session — ignore silently
+    }
+}
+
 async function handleLogin(e) {
     e.preventDefault();
     hideAuthError();
@@ -191,6 +207,7 @@ async function handleLogout() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    fetchCurrentUser(); // restore session (if any) before anything else renders
     applyStaticTranslations();
     var btn = document.getElementById('langToggle');
     if (btn) btn.addEventListener('click', toggleLanguage);
@@ -209,10 +226,15 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ============ CATEGORY / SCHEME LOGIC ============
-function showSchemes(category) {
+
+// NOTE: this function now takes `el` (the clicked element) as a second argument
+// instead of relying on the implicit global `event` object.
+// You must update your HTML so each category card passes `this`, e.g.:
+//   <div class="category-card" onclick="showSchemes('students', this)">
+function showSchemes(category, el) {
     currentCategory = category;
     $('.category-card').removeClass('active');
-    event.currentTarget.classList.add('active');
+    if (el) el.classList.add('active');
     $('#schemesSection').fadeIn(500);
     $('html, body').animate({
         scrollTop: $('#schemesSection').offset().top - 20
