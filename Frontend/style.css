@@ -190,3 +190,35 @@ body {
     justify-content: center;
     height: 100%;
 }
+
+/* ---- Login Button (nicer look) ---- */
+#loginBtn {
+    margin-top: 25px;
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#loginBtn:hover {
+    background-color: #28a745;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- Welcome Text (bigger, more prominent) ---- */
+#welcomeText {
+    font-size: 1.3rem;
+    color: #1a6b3c;
+    font-weight: 700;
+}
+
+/* Optional: make the whole user status row align nicely with the bigger text */
+#userStatusWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
